@@ -44,6 +44,29 @@ src/
 static/                 # Static assets (JSON data files)
 ```
 
+## Syncing Anki Data
+
+To sync your Anki daily activity data to the website:
+
+1. First, get your Anki daily activity data (this should be fetched from your MCP server)
+2. Send a POST request to `/api/anki-activity` with the following format:
+
+```bash
+curl -X POST https://wilmerlapuz.com/api/anki-activity \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dailyActivity": {
+      "2024-12-27": 863,
+      "2024-12-26": 487,
+      "2024-12-25": 98
+    }
+  }'
+```
+
+The API will automatically upsert the data (insert new records or update existing ones) in the Supabase database.
+
+The website will then display this data in a GitHub-style activity grid on the stats section.
+
 ## License
 
 MIT

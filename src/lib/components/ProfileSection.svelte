@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { GithubIcon, LinkedinIcon, Mail, MapPin, ExternalLink, Download, ArrowUpRight } from 'lucide-svelte';
+  import { Github, Linkedin, Mail, MapPin, ExternalLink, Download, ArrowUpRight } from '@lucide/svelte';
 
   const experience = [
     { role: 'Fraud Claims Specialist', company: 'J.P. Morgan', period: '2017 – 2025', current: false },
@@ -10,13 +10,13 @@
     proficient: [
       { name: 'JavaScript', icon: 'devicon-javascript-plain colored' },
       { name: 'React', icon: 'devicon-react-original colored' },
-      { name: 'Next.js', icon: 'devicon-nextjs-plain' },
+      { name: 'Next.js', icon: 'devicon-nextjs-original' },
       { name: 'SvelteKit', icon: 'devicon-svelte-plain colored' },
       { name: 'Tailwind', icon: 'devicon-tailwindcss-original colored' }
     ],
     learning: [
       { name: 'TypeScript', icon: 'devicon-typescript-plain colored' },
-      { name: 'Rust', icon: 'devicon-rust-original' },
+      { name: 'Rust', icon: 'devicon-rust-plain colored' },
       { name: 'Kotlin', icon: 'devicon-kotlin-plain colored' }
     ]
   };
@@ -43,8 +43,8 @@
   ];
 
   const links = [
-    { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/wlmr-rk' },
-    { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/wilmerlapuz/' },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/wlmr-rk' },
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/wilmerlapuz/' },
     { icon: Mail, label: 'Email', href: 'mailto:wilmerlapuz@gmail.com' }
   ];
 </script>
@@ -61,35 +61,35 @@
             <span class="text-xs text-red-400 font-medium tracking-wide">OPEN TO WORK</span>
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-medium tracking-tight mb-3">
-            Wilmer <span class="text-gradient">Lapuz</span>
+            <span class="text-zinc-100">Wilmer</span> <span class="text-gradient">Lapuz</span>
           </h1>
-          <p class="text-lg text-zinc-400">Full Stack Developer</p>
+          <p class="text-lg text-zinc-300">Full Stack Developer</p>
         </div>
         
         <div class="hidden sm:flex items-center gap-3">
           {#each links as link (link.label)}
             <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-white transition-colors" aria-label={link.label}>
-              <link.icon size={18} />
+              <svelte:component this={link.icon} size={18} />
             </a>
           {/each}
         </div>
       </div>
 
-      <p class="text-zinc-400 leading-relaxed max-w-2xl mb-6">
+      <p class="text-zinc-300 leading-relaxed max-w-2xl mb-6">
         Former fraud analyst at J.P. Morgan turned software engineer. I bring 7+ years of analytical rigor to building 
         <span class="text-white">efficient, reliable web applications</span>. Currently focused on JavaScript ecosystem 
         while expanding into systems programming with Rust and Kotlin.
       </p>
 
-      <div class="flex flex-wrap items-center gap-4 text-sm text-zinc-500">
+      <div class="flex flex-wrap items-center gap-4 text-sm text-zinc-400">
         <span class="flex items-center gap-1.5">
           <MapPin size={14} />
           Philippines · GMT+8
         </span>
         <span class="text-zinc-700">·</span>
         <span>Remote preferred</span>
-        <span class="text-zinc-700">·</span>
-        <a href="/resume.pdf" class="flex items-center gap-1.5 text-red-400 link-underline">
+        <span class="text-zinc-600">·</span>
+        <a href="/resume.pdf" class="flex items-center gap-1.5 text-red-500 link-underline">
           <Download size={14} />
           Resume
         </a>
@@ -104,7 +104,7 @@
         
         <!-- Experience - Timeline Style -->
         <div>
-          <h2 class="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-6">Experience</h2>
+          <h2 class="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-6">Experience</h2>
           <div class="relative">
             <!-- Timeline line -->
             <div class="absolute left-[5px] top-2 bottom-2 w-px bg-gradient-to-b from-red-500/50 via-zinc-700 to-transparent"></div>
@@ -115,9 +115,9 @@
                   <!-- Timeline dot -->
                   <div class="absolute left-0 top-1.5 w-[11px] h-[11px] rounded-full {exp.current ? 'bg-red-500 ring-4 ring-red-500/20' : 'bg-zinc-600 ring-2 ring-zinc-800'}"></div>
                   
-                  <div class="text-xs text-zinc-600 mb-1">{exp.period}</div>
-                  <div class="text-sm font-medium text-white">{exp.role}</div>
-                  <div class="text-xs text-zinc-500">{exp.company}</div>
+                  <div class="text-xs text-zinc-500 mb-1">{exp.period}</div>
+                  <div class="text-sm font-medium text-zinc-100">{exp.role}</div>
+                  <div class="text-xs text-zinc-400">{exp.company}</div>
                 </div>
               {/each}
             </div>
@@ -126,10 +126,10 @@
 
         <!-- Skills - Icon only with tooltip -->
         <div>
-          <h2 class="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-4">Skills</h2>
+          <h2 class="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-4">Skills</h2>
           <div class="space-y-4">
             <div>
-              <div class="text-[10px] text-zinc-600 uppercase tracking-wider mb-3">Proficient</div>
+              <div class="text-[10px] text-zinc-500 uppercase tracking-wider mb-3">Proficient</div>
               <div class="flex flex-wrap gap-3">
                 {#each skills.proficient as skill (skill.name)}
                   <div class="skill-icon group relative" title={skill.name}>
@@ -140,7 +140,7 @@
               </div>
             </div>
             <div>
-              <div class="text-[10px] text-zinc-600 uppercase tracking-wider mb-3">Learning</div>
+              <div class="text-[10px] text-zinc-500 uppercase tracking-wider mb-3">Learning</div>
               <div class="flex flex-wrap gap-3">
                 {#each skills.learning as skill (skill.name)}
                   <div class="skill-icon learning group relative" title={skill.name}>
@@ -155,11 +155,11 @@
 
         <!-- Mobile Social Links -->
         <div class="sm:hidden">
-          <h2 class="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-4">Connect</h2>
+          <h2 class="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-4">Connect</h2>
           <div class="flex gap-2">
             {#each links as link (link.label)}
               <a href={link.href} target="_blank" rel="noopener noreferrer" class="p-2.5 text-zinc-400" aria-label={link.label}>
-                <link.icon size={18} />
+                <svelte:component this={link.icon} size={18} />
               </a>
             {/each}
           </div>
@@ -168,21 +168,21 @@
 
       <!-- Right Column: Projects - Minimal border-left style -->
       <div class="lg:col-span-3">
-        <h2 class="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-6">Selected Work</h2>
+        <h2 class="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-6">Selected Work</h2>
         <div class="space-y-1">
           {#each projects as project, i (project.title)}
             <a href={project.url} target="_blank" rel="noopener noreferrer" class="project-item group block py-4 {i !== 0 ? 'border-t border-zinc-800/50' : ''}">
               <div class="flex items-start justify-between gap-4">
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-2 mb-1">
-                    <h3 class="text-sm font-medium text-white group-hover:text-red-400 transition-colors">{project.title}</h3>
-                    <ArrowUpRight size={12} class="text-zinc-700 group-hover:text-red-400 transition-colors" />
+                    <h3 class="text-sm font-medium text-zinc-100 group-hover:text-red-400 transition-colors">{project.title}</h3>
+                    <ArrowUpRight size={12} class="text-zinc-600 group-hover:text-red-400 transition-colors" />
                   </div>
-                  <p class="text-xs text-zinc-500 leading-relaxed">{project.description}</p>
+                  <p class="text-xs text-zinc-400 leading-relaxed">{project.description}</p>
                 </div>
                 <div class="flex flex-wrap gap-1 justify-end max-w-[120px]">
                   {#each project.tech as tech (tech)}
-                    <span class="text-[10px] text-zinc-600">{tech}</span>
+                    <span class="text-[10px] text-zinc-500">{tech}</span>
                   {/each}
                 </div>
               </div>
@@ -190,7 +190,7 @@
           {/each}
         </div>
         
-        <a href="https://github.com/wlmr-rk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-6 text-xs text-zinc-500 link-underline">
+        <a href="https://github.com/wlmr-rk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-6 text-xs text-zinc-400 link-underline">
           View all on GitHub
           <ExternalLink size={12} />
         </a>

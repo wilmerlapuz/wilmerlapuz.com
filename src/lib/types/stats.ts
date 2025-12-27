@@ -42,6 +42,7 @@ export interface AnkiStats {
     name: string;
     cards: number;
   }>;
+  dailyActivity?: Record<string, number>;
 }
 
 export interface AllStats {

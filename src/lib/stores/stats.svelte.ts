@@ -3,27 +3,41 @@ import { supabase } from '$lib/supabase';
 
 export async function fetchStats(): Promise<AllStats> {
   // Fetch latest Anki stats
-  const { data: ankiData } = await supabase
+  const { data: ankiData, error: ankiError } = await supabase
     .from('anki_stats')
     .select('*')
     .order('last_updated', { ascending: false })
     .limit(1)
     .single();
 
+  if (ankiError) console.error('Anki fetch error:', ankiError);
+
+  // Fetch Anki daily activity
+  const { data: ankiActivityData, error: ankiActivityError } = await supabase
+    .from('anki_daily_activity')
+    .select('activity_date, review_count')
+    .order('activity_date', { ascending: false });
+
+  if (ankiActivityError) console.error('Anki activity fetch error:', ankiActivityError);
+
   // Fetch latest Strava aggregate stats
-  const { data: stravaStatsData } = await supabase
+  const { data: stravaStatsData, error: stravaStatsError } = await supabase
     .from('strava_stats')
     .select('*')
     .order('last_updated', { ascending: false })
     .limit(1)
     .single();
 
+  if (stravaStatsError) console.error('Strava stats fetch error:', stravaStatsError);
+
   // Fetch recent Strava runs
-  const { data: stravaRunsData } = await supabase
+  const { data: stravaRunsData, error: stravaRunsError } = await supabase
     .from('strava_runs')
     .select('*')
     .order('run_date', { ascending: false })
     .limit(5);
+
+  if (stravaRunsError) console.error('Strava runs fetch error:', stravaRunsError);
 
   const stats: AllStats = { 
     lastUpdated: new Date().toISOString() 
@@ -31,6 +45,12 @@ export async function fetchStats(): Promise<AllStats> {
 
   // Transform Anki data to match expected format
   if (ankiData) {
+    // Transform daily activity data
+    const dailyActivity = ankiActivityData?.reduce((acc, record) => {
+      acc[record.activity_date] = record.review_count;
+      return acc;
+    }, {} as Record<string, number>) || {};
+
     stats.anki = {
       lastUpdated: ankiData.last_updated,
       totalCards: ankiData.total_cards,
@@ -58,6 +78,7 @@ export async function fetchStats(): Promise<AllStats> {
         avgPerDay: ankiData.forecast_avg_per_day,
       },
       topDecks: ankiData.top_decks || [],
+      dailyActivity,
     } as AnkiStats;
   }
 

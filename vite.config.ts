@@ -3,5 +3,11 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()]
+	plugins: [tailwindcss(), sveltekit()],
+	resolve: {
+		dedupe: ['tslib']
+	},
+	optimizeDeps: {
+		include: ['tslib', 'layerchart', 'echarts']
+	}
 });
