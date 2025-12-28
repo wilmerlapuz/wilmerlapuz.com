@@ -241,7 +241,7 @@
             <GlassCard>
               <div class="text-xs font-medium mb-3" style="color: var(--text-secondary);">Recent Runs</div>
               <div class="space-y-2">
-                {#each stats.strava.allRuns.slice(0, 5) as run (run.date)}
+                {#each stats.strava.allRuns.slice(0, 5) as run, idx (`${run.date}-${idx}`)}
                   <div 
                     class="flex items-center justify-between py-2 border-b last:border-0"
                     style="border-color: rgba(255,255,255,0.04);"

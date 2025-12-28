@@ -47,6 +47,8 @@
     let ro: ResizeObserver | null = null;
     
     const initChart = async () => {
+      await new Promise(resolve => setTimeout(resolve, 0));
+      
       const echarts = await import('echarts');
       
       const weeklyData = groupByWeek();

@@ -127,7 +127,7 @@
 <div class="activity-grid">
   <!-- Month labels -->
   <div class="flex gap-1.5 mb-2 pl-8">
-    {#each monthLabels as { label, col }}
+    {#each monthLabels as { label, col } (label + col)}
       <div class="text-[10px]" style="margin-left: {col * 20}px; color: var(--text-tertiary);">
         {label}
       </div>
@@ -149,14 +149,14 @@
 
     <!-- Weeks -->
     <div class="flex gap-1.5" role="grid" aria-label="Activity calendar">
-      {#each weeks as week, weekIdx}
+      {#each weeks as week, weekIdx (weekIdx)}
         <!-- Add gap between months (skip first month) -->
         {#if weekIdx > 0 && monthLabels.some(m => m.col === weekIdx)}
           <div class="w-3"></div>
         {/if}
         
         <div class="flex flex-col gap-1.5" role="row">
-          {#each week as day}
+          {#each week as day, dayIdx (day.date || `${weekIdx}-${dayIdx}`)}
             <div
               class="w-[14px] h-[14px] rounded {getCellColor(day)} transition-all hover:ring-2 hover:scale-110"
               style="--tw-ring-color: rgba(255,255,255,0.2);"

@@ -25,8 +25,13 @@
     let cleanup: (() => void) | undefined;
 
     const initChart = async () => {
+      await new Promise(resolve => setTimeout(resolve, 0));
+      
       const echarts = await import('echarts');
-      chart = echarts.init(chartContainer!);
+      
+      if (!chartContainer) return;
+      
+      chart = echarts.init(chartContainer);
 
       const option = {
         backgroundColor: 'transparent',
