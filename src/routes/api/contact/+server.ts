@@ -1,9 +1,11 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { Resend } from 'resend';
-import { RESEND_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
-const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
+function getResendClient() {
+  return env.RESEND_API_KEY ? new Resend(env.RESEND_API_KEY) : null;
+}
 const TO_EMAIL = 'wilmer.lapuz@gmail.com';
 const FROM_EMAIL = 'onboarding@wilmerlapuz.com';
 
@@ -16,6 +18,7 @@ export const POST: RequestHandler = async ({ request }) => {
       return json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    const resend = getResendClient();
     if (!resend) {
       console.warn('Resend API key is missing. Skipping email notification.');
       return json({ message: 'Submission received, but email notification is disabled.' }, { status: 207 });
