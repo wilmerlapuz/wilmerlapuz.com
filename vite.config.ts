@@ -8,6 +8,6 @@ export default defineConfig({
 		dedupe: ['tslib']
 	},
 	optimizeDeps: {
-		include: ['tslib', 'layerchart', 'echarts']
+		include: ['tslib', 'echarts']
 	}
 });

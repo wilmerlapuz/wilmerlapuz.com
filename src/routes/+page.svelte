@@ -1,13 +1,14 @@
 <script lang="ts">
   import ProfileSection from '$lib/components/ProfileSection.svelte';
   import StatsSection from '$lib/components/StatsSection.svelte';
-  import NewContactSection from '$lib/components/NewContactSection.svelte';
+  import ContactSection from '$lib/components/ContactSection.svelte';
+  import type { PageData } from '$lib/types/stats';
 
-  let { data }: any = $props();
+  let { data }: { data: PageData } = $props();
 </script>
 
 <main>
   <ProfileSection />
   <StatsSection stats={data.stats} combinedActivity={data.combinedActivity} />
-  <NewContactSection />
+  <ContactSection />
 </main>

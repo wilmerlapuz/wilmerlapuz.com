@@ -1,5 +1,5 @@
 {
-  "name": "xwebsite",
+  "name": "wilmerlapuz.com",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -18,16 +18,13 @@
     "@sveltejs/kit": "^2.9.0",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tailwindcss/vite": "^4.0.0",
-    "@types/d3-scale": "^4.0.9",
-    "@types/d3-shape": "^3.1.7",
     "@types/node": "^22.10.2",
     "clsx": "^2.1.1",
-    "layerchart": "2.0.0-next.43",
     "oxc-transform": "^0.105.0",
     "oxlint": "^1.35.0",
     "rolldown": "^1.0.0-beta.57",
     "svelte": "^5.14.1",
-    "svelte-check": "^4.1.1",
+    "svelte-check": "^4.3.5",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.0.0",
@@ -36,11 +33,9 @@
     "vite": "^6.0.3"
   },
   "dependencies": {
-    "@layerstack/svelte-state": "^0.1.0-next.23",
     "@supabase/supabase-js": "^2.89.0",
-    "d3-scale": "^4.0.2",
-    "d3-shape": "^3.2.0",
     "echarts": "^6.0.0",
+    "lucide-svelte": "^0.562.0",
     "resend": "^4.5.2",
     "tslib": "^2.8.1"
   }

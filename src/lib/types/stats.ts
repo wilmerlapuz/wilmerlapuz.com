@@ -1,33 +1,10 @@
-export interface StravaStats {
-  totalRuns: number;
-  totalDistanceKm: string;
-  totalTimeHours: string;
-  avgDistanceKm: string;
-  avgPace: string;
-  recentRuns: Array<{
-    name: string;
-    distanceKm: string;
-    date: string;
-    pace: string;
-  }>;
-}
-
 export interface AnkiStats {
-  lastUpdated: string;
   totalCards: number;
   totalNotes: number;
-  deckCount: number;
   cardStates: {
-    new: number;
-    learning: number;
-    young: number;
     mature: number;
-    suspended: number;
-    buried: number;
-  };
-  today: {
-    studied: number;
-    timeMinutes: number;
+    young: number;
+    new: number;
   };
   retention: {
     overall: number;
@@ -38,15 +15,40 @@ export interface AnkiStats {
     next30Days: number;
     avgPerDay: number;
   };
-  topDecks: Array<{
-    name: string;
-    cards: number;
-  }>;
-  dailyActivity?: Record<string, number>;
+  topDecks: Array<{ name: string; cards: number }>;
+  todayStudied: number;
+  dailyActivity: Record<string, number>;
+  lastUpdated?: string;
 }
 
-export interface AllStats {
-  strava?: StravaStats;
+export interface StravaRun {
+  date: string;
+  distanceKm: number;
+  pace: number;
+}
+
+export interface StravaStats {
+  totalRuns: number;
+  totalDistanceKm: number;
+  totalTimeHours: number;
+  avgPace: number;
+  allRuns: StravaRun[];
+  lastUpdated?: string;
+}
+
+export interface Stats {
   anki?: AnkiStats;
-  lastUpdated: string;
+  strava?: StravaStats;
+}
+
+export interface CombinedActivity {
+  [date: string]: {
+    anki: number;
+    strava: boolean;
+  };
+}
+
+export interface PageData {
+  stats: Stats;
+  combinedActivity: CombinedActivity;
 }

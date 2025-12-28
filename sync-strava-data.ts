@@ -5,12 +5,7 @@
  *   bun run sync-strava-data.ts
  */
 
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = 'https://plrvdkwcnlbjsohztnkg.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBscnZka3djbmxianNvaHp0bmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3MzI5OTIsImV4cCI6MjA4MjMwODk5Mn0.jg6yFPySTCxSqit_Ka-8rKQk1O_pfOCuIOdQLeTB24Q';
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from './scripts/supabase-client';
 
 const STRAVA_DATA = {
   stats: {
@@ -120,7 +115,7 @@ async function syncStravaData() {
     console.log('\n🎉 Strava data is now up to date!');
   } catch (error) {
     console.error('❌ Error syncing Strava data:', error);
-    process.exit(1);
+    Bun.exit(1);
   }
 }
 

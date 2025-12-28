@@ -1,8 +1,9 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { Resend } from 'resend';
+import { RESEND_API_KEY } from '$env/static/private';
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 const TO_EMAIL = 'wilmer.lapuz@gmail.com';
 const FROM_EMAIL = 'onboarding@wilmerlapuz.com';
 

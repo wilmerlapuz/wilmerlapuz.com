@@ -128,7 +128,7 @@
   <!-- Month labels -->
   <div class="flex gap-1.5 mb-2 pl-8">
     {#each monthLabels as { label, col }}
-      <div class="text-[10px] text-zinc-500" style="margin-left: {col * 20}px">
+      <div class="text-[10px]" style="margin-left: {col * 20}px; color: var(--text-tertiary);">
         {label}
       </div>
     {/each}
@@ -137,7 +137,7 @@
   <!-- Grid -->
   <div class="flex gap-1">
     <!-- Day labels -->
-    <div class="flex flex-col gap-1.5 text-[10px] text-zinc-600 pr-2">
+    <div class="flex flex-col gap-1.5 text-[10px] pr-2" style="color: var(--text-tertiary);">
       <div style="height: 14px"></div>
       <div>Mon</div>
       <div style="height: 14px"></div>
@@ -148,19 +148,20 @@
     </div>
 
     <!-- Weeks -->
-    <div class="flex gap-1.5">
+    <div class="flex gap-1.5" role="grid" aria-label="Activity calendar">
       {#each weeks as week, weekIdx}
         <!-- Add gap between months (skip first month) -->
         {#if weekIdx > 0 && monthLabels.some(m => m.col === weekIdx)}
           <div class="w-3"></div>
         {/if}
         
-        <div class="flex flex-col gap-1.5">
+        <div class="flex flex-col gap-1.5" role="row">
           {#each week as day}
             <div
-              class="w-[14px] h-[14px] rounded {getCellColor(day)} transition-all hover:ring-2 hover:ring-zinc-600"
-              title={getTooltip(day)}
+              class="w-[14px] h-[14px] rounded {getCellColor(day)} transition-all hover:ring-2 hover:scale-110"
+              style="--tw-ring-color: rgba(255,255,255,0.2);"
               role="gridcell"
+              aria-label={getTooltip(day)}
             ></div>
           {/each}
         </div>
@@ -169,7 +170,7 @@
   </div>
 
   <!-- Legend -->
-  <div class="flex items-center gap-3 mt-4 text-[10px] text-zinc-500">
+  <div class="flex items-center gap-3 mt-4 text-[10px]" style="color: var(--text-tertiary);">
     <span>Less</span>
     <div class="flex gap-1.5">
       <div class="w-[14px] h-[14px] rounded bg-zinc-900"></div>
@@ -177,13 +178,13 @@
       <div class="w-[14px] h-[14px] rounded bg-blue-700"></div>
       <div class="w-[14px] h-[14px] rounded bg-blue-500"></div>
     </div>
-    <span class="text-blue-400">Anki</span>
+    <span style="color: var(--accent-blue);">Anki</span>
     
     <div class="w-[14px] h-[14px] rounded bg-orange-600"></div>
-    <span class="text-orange-400">Run</span>
+    <span style="color: var(--accent-orange);">Run</span>
     
     <div class="w-[14px] h-[14px] rounded activity-both"></div>
-    <span class="text-zinc-400">Both</span>
+    <span style="color: var(--text-secondary);">Both</span>
     <span>More</span>
   </div>
 </div>

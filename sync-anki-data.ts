@@ -12,12 +12,7 @@
  * The data should be provided in the ANKI_DAILY_ACTIVITY constant below.
  */
 
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = 'https://plrvdkwcnlbjsohztnkg.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBscnZka3djbmxianNvaHp0bmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3MzI5OTIsImV4cCI6MjA4MjMwODk5Mn0.jg6yFPySTCxSqit_Ka-8rKQk1O_pfOCuIOdQLeTB24Q';
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from './scripts/supabase-client';
 
 // Anki daily activity data (last updated: 2025-12-27)
 // Total days with activity: 145
@@ -209,7 +204,7 @@ async function syncAnkiData() {
     console.log('Your Anki activity is now available on the website.');
   } catch (error) {
     console.error('❌ Error syncing Anki data:', error);
-    process.exit(1);
+    Bun.exit(1);
   }
 }
 
